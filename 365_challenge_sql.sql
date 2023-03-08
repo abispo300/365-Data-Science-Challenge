@@ -123,8 +123,8 @@ FROM
         JOIN
     user_type ut ON sl.student_id = ut.user_id
 GROUP BY student_id , course_id;
-    
-# A visualização desde dados foram feitas com software Tableau com a criação de uma dashboard.
+
+# A visualização destes dados foi realizada com software Tableau com a criação de uma dashboard.
 
 
 

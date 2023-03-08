@@ -39,8 +39,6 @@ FROM
     GROUP BY course_id) cr USING (course_id)
 GROUP BY ci.course_id;
 
-# Verificando os dados da tabela course_info são coerentes ao que se espera.
-select * FROM course_info;
 
 # Construindo a segunda fonte de dados. Que contem informações sobre os tipos de estudantes. 
 
@@ -56,7 +54,7 @@ CREATE TABLE IF NOT EXISTS user_type
     course_id INT
 );
 
-# Inserindo os dados na segunda tabela. A coluna onboard categoriza se o usuario da plataforma fez ao menos um \it{quizze}, ou um exame, ou assistiu alguma aula.
+# Inserindo os dados na segunda tabela. A coluna onboard categoriza se o usuário da plataforma fez ao menos um quiz, ou um exame, ou assistiu à alguma aula. Na coluna paid considera-se usuário 'No' aquele que nunca fez uma compra na plataforma, ao contrário, os pagantes realizaram pelo menos um tipo de assinatura. As demais colunas são diretas ao que se referem.
 
 INSERT INTO user_type
 SELECT 
@@ -107,6 +105,8 @@ CREATE TABLE IF NOT EXISTS user_course (
     onboarded ENUM('Yes', 'No')
 );
 
+# Inserindo os dados. Aqui processa os dados sobre os usuários e os cursos que eles concluíram ou pelo menos começaram. 
+
 INSERT INTO user_course
 SELECT 
     sl.student_id,
@@ -124,8 +124,7 @@ FROM
     user_type ut ON sl.student_id = ut.user_id
 GROUP BY student_id , course_id;
     
-    
-    
+# A visualização desde dados foram feitas com software Tableau com a criação de uma dashboard.
 
 
 

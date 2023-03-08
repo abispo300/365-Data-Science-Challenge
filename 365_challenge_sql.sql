@@ -1,7 +1,8 @@
 USE 365_database;
 
-# Construindo a primeira fontes de dados para os análises.
-# Criar uma tabela com informações sobre os cursos mais populares.
+# Construindo três tabelas com informações sobre os cursos, os tipos de estudantes, e a terceira sobre os estudantes e seus respectivos cursos.
+
+# Criando a primeira tabela com informações sobre os cursos mais populares.
 
 DROP TABLE course_info;
 CREATE TABLE IF NOT EXISTS course_info 
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS course_info
     average_course_rating DOUBLE
 );
 
-# Insirir os dados sobre os cursos.
+# Inserir os dados sobre os cursos. As colunas nessa fonte de dados são diretas a que se propõe.
 
 INSERT INTO course_info
 SELECT 
@@ -38,7 +39,7 @@ FROM
     GROUP BY course_id) cr USING (course_id)
 GROUP BY ci.course_id;
 
-# Verificando os dados da tabela course_info
+# Verificando os dados da tabela course_info são coerentes ao que se espera.
 select * FROM course_info;
 
 # Construindo a segunda fonte de dados. Que contem informações sobre os tipos de estudantes. 
@@ -54,6 +55,8 @@ CREATE TABLE IF NOT EXISTS user_type
     user_type INT,
     course_id INT
 );
+
+# Inserindo os dados na segunda tabela. A coluna onboard categoriza se o usuario da plataforma fez ao menos um \it{quizze}, ou um exame, ou assistiu alguma aula.
 
 INSERT INTO user_type
 SELECT 
